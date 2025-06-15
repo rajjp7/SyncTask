@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import AdminDashboard from './pages/AdminDashboard';
+import UserDashboard from './pages/UserDashboard';
+import AssignTask from './pages/AssignTask';
 
 const App = () => {
-  return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold">Welcome to the Admin Dashboard</h1>
-    </div>
-  )
-}
+  const [tasks, setTasks] = useState([]);
 
-export default App
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard tasks={tasks} />} />
+        <Route path="/user-dashboard" element={<UserDashboard tasks={tasks} />} />
+        <Route path="/assign-task" element={<AssignTask setTasks={setTasks} />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
