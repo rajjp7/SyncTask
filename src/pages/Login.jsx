@@ -27,7 +27,7 @@ export default function Login() {
   );
 
   if (user) {
-    localStorage.setItem('user', JSON.stringify(user)); // ✅ CORRECT USER
+    localStorage.setItem('user', JSON.stringify(user));
     navigate(user.role === 'admin' ? '/admin-dashboard' : '/user-dashboard');
   } else {
     alert('Invalid credentials');

@@ -8,7 +8,7 @@ import Register from './pages/Register';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const [user, setUser] = useState(null); // stores logged-in user email and role
+  const [user, setUser] = useState(null); 
 
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];

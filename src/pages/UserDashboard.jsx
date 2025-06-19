@@ -7,16 +7,25 @@ const UserDashboard = ({ user: propUser, tasks: propTasks }) => {
   const [tasks, setTasks] = useState(propTasks || []);
 
   useEffect(() => {
-    // Load user from localStorage if not provided
     if (!propUser) {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       setUser(storedUser);
     }
 
-    // Load tasks from localStorage if not provided
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     setTasks(storedTasks);
   }, [propUser]);
+
+  const handleComplete = (taskId) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId && task.assignedTo?.toLowerCase() === user.email?.toLowerCase()
+        ? { ...task, status: 'Completed' }
+        : task
+    );
+
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
 
   if (!user) {
     return (
@@ -26,7 +35,6 @@ const UserDashboard = ({ user: propUser, tasks: propTasks }) => {
     );
   }
 
-  // Proper email matching to avoid case/whitespace issues
   const userTasks = tasks.filter(
     (task) =>
       task.assignedTo?.trim().toLowerCase() === user.email?.trim().toLowerCase()
@@ -35,7 +43,6 @@ const UserDashboard = ({ user: propUser, tasks: propTasks }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-300 p-6">
       <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg p-6">
-        {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-slate-800">
             Welcome, <span className="text-blue-600">{user.email}</span>
@@ -51,7 +58,7 @@ const UserDashboard = ({ user: propUser, tasks: propTasks }) => {
           </button>
         </div>
 
-        {/* Tasks Section */}
+        
         <h3 className="text-xl font-semibold text-gray-800 mb-4">Your Tasks</h3>
 
         {userTasks.length === 0 ? (
@@ -75,6 +82,15 @@ const UserDashboard = ({ user: propUser, tasks: propTasks }) => {
                     <span className="font-semibold">Assigned on:</span> {task.createdAt}
                   </p>
                 </div>
+
+                {task.status !== 'Completed' && (
+                  <button
+                    onClick={() => handleComplete(task.id)}
+                    className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition text-sm"
+                  >
+                    ✅ Mark as Completed
+                  </button>
+                )}
               </div>
             ))}
           </div>
