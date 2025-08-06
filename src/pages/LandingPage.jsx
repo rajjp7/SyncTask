@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, BarChart2, Users, Star } from 'lucide-react';
+import { CheckCircle, BarChart2, Users, Twitter, Linkedin, GitBranch } from 'lucide-react';
 
-
+// --- Reusable Components for the Landing Page ---
 
 const FeatureCard = ({ icon, title, children }) => (
-    <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700/50 transition-all duration-300 hover:border-blue-500/50 hover:bg-gray-800 hover:-translate-y-2">
-        <div className="bg-blue-600/20 text-blue-400 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+    <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700/50 transition-all duration-300 hover:border-blue-500/50 hover:bg-gray-800 hover:-translate-y-2 group">
+        <div className="bg-blue-600/20 text-blue-400 w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-blue-600/30 group-hover:text-blue-300">
             {icon}
         </div>
         <h3 className="text-2xl font-bold mb-3 text-white">{title}</h3>
@@ -14,23 +14,7 @@ const FeatureCard = ({ icon, title, children }) => (
     </div>
 );
 
-
-const TestimonialCard = ({ name, role, children }) => (
-    <div className="bg-gray-800 p-8 rounded-2xl">
-        <div className="flex items-center mb-4">
-            <div className="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center font-bold text-white mr-4">
-                {name.charAt(0)}
-            </div>
-            <div>
-                <p className="font-bold text-white">{name}</p>
-                <p className="text-sm text-gray-400">{role}</p>
-            </div>
-        </div>
-        <p className="text-gray-300 italic">"{children}"</p>
-    </div>
-);
-
-
+// --- Main Landing Page Component ---
 
 const LandingPage = () => {
     useEffect(() => {
@@ -64,14 +48,13 @@ const LandingPage = () => {
 
     return (
         <div className="bg-gray-900 text-white font-sans">
-            
             <header className="fixed w-full top-0 z-50 transition-all duration-300 backdrop-blur-lg bg-gray-900/50 border-b border-gray-800/50">
                 <div className="container mx-auto flex justify-between items-center p-4">
                     <a href="#home" className="text-2xl font-bold tracking-wider">SyncTask</a>
                     <nav className="hidden md:flex space-x-8 items-center text-sm font-medium text-gray-300">
                         <a href="#home" className="hover:text-white transition">Home</a>
                         <a href="#features" className="hover:text-white transition">Features</a>
-                        <a href="#testimonials" className="hover:text-white transition">Testimonials</a>
+                        <a href="#about" className="hover:text-white transition">About</a>
                     </nav>
                     <div className="hidden md:flex items-center space-x-2">
                         <Link to="/login" className="px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition">Login</Link>
@@ -86,7 +69,7 @@ const LandingPage = () => {
                 <div id="mobile-menu" className="hidden md:hidden">
                     <a href="#home" className="block p-4 hover:bg-gray-800">Home</a>
                     <a href="#features" className="block p-4 hover:bg-gray-800">Features</a>
-                    <a href="#testimonials" className="block p-4 hover:bg-gray-800">Testimonials</a>
+                    <a href="#about" className="block p-4 hover:bg-gray-800">About</a>
                     <div className="p-4 border-t border-gray-700 flex flex-col gap-2">
                         <Link to="/login" className="block w-full text-center px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition">Login</Link>
                         <Link to="/register" className="block w-full text-center px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-500 transition">Register</Link>
@@ -100,18 +83,17 @@ const LandingPage = () => {
                 </div>
                 <div className="relative z-10 max-w-4xl">
                     <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                        Synchronize Your Success with SyncTask
+                        Orchestrate Your Workflow
                     </h1>
                     <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                        The ultimate platform for seamless task management and team collaboration. Turn your goals into achievements.
+                        SyncTask is the ultimate platform for seamless task management and team collaboration. Turn your goals into achievements.
                     </p>
                     <div className="flex justify-center gap-4">
                         <Link to="/register" className="px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition transform hover:scale-105">
                             Get Started for Free
                         </Link>
                     </div>
-                
-                    <div className="mt-16 w-full max-w-2xl mx-auto p-2 rounded-xl bg-gray-800/50 border border-gray-700/50 shadow-2xl">
+                    <div className="mt-16 w-full max-w-2xl mx-auto p-2 rounded-xl bg-gray-800/50 border border-gray-700/50 shadow-2xl animate-breathing">
                         <div className="h-8 bg-gray-700 rounded-t-lg flex items-center px-4">
                             <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
                             <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -146,21 +128,12 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            
-            <section id="testimonials" className="py-24 bg-gray-800/50">
-                <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-white">Loved by Teams Worldwide</h2>
-                        <p className="text-gray-400 mt-2">Don't just take our word for it. Here's what our users say.</p>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        <TestimonialCard name="Sarah J." role="Project Manager">
-                            "SyncTask has revolutionized how our team works. The real-time updates and clear interface have boosted our productivity by over 40%!"
-                        </TestimonialCard>
-                        <TestimonialCard name="Mike R." role="Lead Developer">
-                            "As a developer, I appreciate tools that just work. SyncTask is intuitive, fast, and has all the features we need without the bloat."
-                        </TestimonialCard>
-                    </div>
+            <section id="about" className="py-24 bg-gray-800/50">
+                <div className="container mx-auto px-6 text-center">
+                    <h2 className="text-4xl font-bold text-white">What is SyncTask?</h2>
+                    <p className="max-w-3xl mx-auto text-gray-400 mt-4 leading-relaxed">
+                        SyncTask is an intuitive and powerful task management tool designed for modern teams. We believe that productivity comes from clarity and collaboration. Our platform provides a centralized hub for all your projects, tasks, and deadlines, ensuring everyone is on the same page and working towards the same objectives.
+                    </p>
                 </div>
             </section>
 
@@ -168,16 +141,16 @@ const LandingPage = () => {
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="text-4xl font-bold text-white mb-4">Ready to Boost Your Productivity?</h2>
                     <p className="text-gray-400 mb-8 max-w-2xl mx-auto">Join thousands of teams who are achieving their goals faster with SyncTask. Sign up today and get started in minutes.</p>
-                    <Link to="/register" className="px-10 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-500 transition transform hover:scale-105">
+                    <Link to="/register" className="px-10 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-500 transition transform hover:scale-105 inline-block">
                         Sign Up Now - It's Free
                     </Link>
                 </div>
             </section>
 
-          
             <footer className="bg-gray-900 border-t border-gray-800 py-8">
                 <div className="container mx-auto text-center text-gray-500 text-sm">
-                    <p>&copy; 2024 SyncTask. All rights reserved.</p>
+                  
+                    <p>&copy; 2025 SyncTask. All rights reserved.</p>
                 </div>
             </footer>
         </div>
@@ -185,4 +158,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
