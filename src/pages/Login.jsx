@@ -91,7 +91,7 @@ const Login = () => {
                             <div className="relative mt-1">
                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3"><Lock className="w-5 h-5 text-gray-400" /></span>
                                 <input
-                                    id="password" type="password" placeholder="••••••••"
+                                    id="password" type="password" placeholder="password"
                                     className={`w-full py-3 pl-10 pr-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-white ${errors.password ? 'border-red-500' : 'border-gray-600'}`}
                                     value={password}
                                     onChange={(e) => { setPassword(e.target.value); if (errors.password) setErrors({ ...errors, password: null, form: null }); }}

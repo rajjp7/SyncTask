@@ -21,7 +21,7 @@ const StatusBadge = ({ status }) => {
     const styles = {
         Pending: "bg-yellow-500/20 text-yellow-400",
         Completed: "bg-green-500/20 text-green-400",
-        'In Progress': "bg-blue-500/20 text-blue-400",
+        'In Progress': "bg-blue-500/20 text-blue-400"
     };
     const icons = {
         Pending: <Clock className="w-3 h-3 mr-1.5" />,
